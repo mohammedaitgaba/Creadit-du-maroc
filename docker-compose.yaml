@@ -1,0 +1,37 @@
+version : "3.8"
+services :
+  mongo_db:
+    container_name: mongo_db
+    image: mongo:latest
+    volumes:
+      - mongo_db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27018:27017
+  api :
+    build: ./api
+    container_name: api_c
+    ports:
+      - '4000:3000'
+    environment:
+      PORT: 3000
+      MONGODB_URI: mongodb://mongo_db:27017
+      DB_NAME: Creadit-du-maroc
+    volumes:
+      - ./api:/app
+
+    depends_on:
+      - mongo_db    
+  frontend :
+    build: ./frontend
+    container_name: frontend_c
+    ports:
+     - '3000:3000'
+    stdin_open: true
+    tty: true
+
+
+volumes:
+  mongo_db:
