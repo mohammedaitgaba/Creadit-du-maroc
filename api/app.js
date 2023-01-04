@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const globalErrHandler = require("./src/middlewares/errorMiddleware");
-// const AppError = require("./src/middlewares/appErrorMiddleware");
+const AppError = require("./src/middlewares/appErrorMiddleware");
 const app = express();
 
 // Allow Cross-Origin requests
@@ -47,7 +47,7 @@ app.use(hpp());
 /* Parsing the body of the request. */
 app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
 
-// require("./src/routes/index.routes")(app, "/api/v1/NAMAX");
+require("./src/routes/index.routes")(app, "/api/CRM");
 
 // // handle undefined Routes
 app.use("*", (req, res, next) => {
