@@ -35,6 +35,12 @@ const usersSchema = mongoose.Schema({
         Password: {
             type: String,
             required: true,
+        },
+        imageName:{
+            type: String,
+          },
+        imageData: {
+            type: Buffer,
         }
     })
 
