@@ -27,7 +27,6 @@ const usersSchema = mongoose.Schema({
             trim: true,
             lowercase: true,
             required: true,
-            unique: true,
             validate(value) {
               return validator.isEmail(value);
             },
@@ -36,10 +35,15 @@ const usersSchema = mongoose.Schema({
             type: String,
             required: true,
         },
-        imageName:{
+        Gender:{
+            type:String,
+            enum: ['Homme','femme'],
+            required:true
+        },
+        ImageName:{
             type: String,
           },
-        imageData: {
+        ImageData: {
             type: Buffer,
         }
     })

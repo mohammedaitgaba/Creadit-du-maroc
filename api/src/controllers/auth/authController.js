@@ -4,9 +4,9 @@ const bycrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const signup = asyncHnadler(async (req, res) => {
-  const { Fname, Lname, CIN, Phone, Birthday, Email, Password } = req.body;
-  console.log(req.body);
+  const { Fname, Lname, CIN, Phone, Birthday,Gender, Email, Password } = req.body;
   //   check for values of each feild
+  console.log(Email);
   if (Object.values(req.body).some((v) => !v)) {
     return res.sendStatus(400, {
       message: "Please fill all required fields",
@@ -26,6 +26,7 @@ const signup = asyncHnadler(async (req, res) => {
     Phone,
     Email,
     Birthday,
+    Gender,
     CIN,
     Password:hashPassword
   });
@@ -44,6 +45,7 @@ const signin = asyncHnadler(async(req, res) => {
           lastname : user.Lname,
           Phone : user.Phone,
           Email : user.Email,
+          Gender : user.Gender,
           token : TokenGenerator(user.id)
       })
   }else{
