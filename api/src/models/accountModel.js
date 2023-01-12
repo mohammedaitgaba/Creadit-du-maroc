@@ -1,8 +1,22 @@
 const mongoose = require("mongoose")
-const transaction = new mongoose.Schema({
+const transaction_Sent = new mongoose.Schema({
     reciver: {
-      type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
+    balance: {
+      type: Number,
       required: true
+    },
+    transactionDate:{
+        type:Date,
+        required:true
+    }
+  });
+  const transaction_Recived = new mongoose.Schema({
+    Sender: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
     },
     balance: {
       type: Number,
@@ -19,6 +33,7 @@ const Account = mongoose.model(
         user:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
+            required:true
         },
         reference:{
             type:String,
@@ -34,13 +49,15 @@ const Account = mongoose.model(
         },
         balance:{
             type:Number,
-            required:true
+            required:true,
+            default:1000
         },
-        transactions:{
-            type:[transaction],
+        transactions_Sent:{
+            type:[transaction_Sent],
+        },
+        transactions_Recived:{
+            type:[transaction_Recived],
         }
     })
 )
-module.exports = {
-    Account
-}
+module.exports = Account
