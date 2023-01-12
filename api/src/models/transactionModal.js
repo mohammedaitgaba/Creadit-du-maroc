@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 const TransactionsSchema = mongoose.Schema({
     Sender: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
+        ref: "Account",
     },
-    reciver: {
+    Reciver: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
+        ref: "Account",
     },
     balance: {
       type: Number,
