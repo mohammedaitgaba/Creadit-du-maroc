@@ -1,16 +1,5 @@
 const mongoose = require("mongoose")
   const operationHistory = new mongoose.Schema({
-
-    operationMaker:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:true,
-        refpath:'docModel'
-    },
-    docModel: {
-        type: String,
-        required: true,
-        enum: ['admin', 'users']
-    },
     operationType: {
         type:String,
         enum: ['ajoute','retait']

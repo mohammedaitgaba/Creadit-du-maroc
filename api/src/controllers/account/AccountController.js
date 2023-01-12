@@ -59,14 +59,29 @@ const PullMoney = asyncHnadler(async(req,res)=>{
        const newOperation = await Account.findByIdAndUpdate(id_acc,{$set:{balance:account.balance-balance_pulled}})
        if (newOperation) {
            res.json({message : "opération effectuée avec succès"})
+           addOperation(id_acc,'retrait',balance_pulled,operationDate)
        }
     }else{
         res.status(400)
         throw new Error(`l'opération a échoué, le maximum que vous pouvez tirer est :${account.balance} DH`)
     }
 })
+const addOperation = asyncHnadler(async(id_acc,operationType,balance,operationDate)=>{
+    const history = {
+        operationType,
+        balance,
+        operationDate
+    }
+    const operation = await Account.findByIdAndUpdate(id_acc,{$push:{history:history}})
+    if (!operation) {
+        throw new Error('error')
+    }
+})
+
 
 
 module.exports={
-    CreateAcc,SignToAcc,PullMoney
+    CreateAcc,
+    SignToAcc,
+    PullMoney
 }
