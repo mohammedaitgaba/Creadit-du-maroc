@@ -1,28 +1,25 @@
 const mongoose = require("mongoose")
-const transaction_Sent = new mongoose.Schema({
-    reciver: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
+  const operationHistory = new mongoose.Schema({
+
+    operationMaker:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        refpath:'docModel'
+    },
+    docModel: {
+        type: String,
+        required: true,
+        enum: ['admin', 'users']
+    },
+    operationType: {
+        type:String,
+        enum: ['ajoute','retait']
     },
     balance: {
       type: Number,
       required: true
     },
-    transactionDate:{
-        type:Date,
-        required:true
-    }
-  });
-  const transaction_Recived = new mongoose.Schema({
-    Sender: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
-    },
-    balance: {
-      type: Number,
-      required: true
-    },
-    transactionDate:{
+    operationDate:{
         type:Date,
         required:true
     }
@@ -52,12 +49,7 @@ const Account = mongoose.model(
             required:true,
             default:1000
         },
-        transactions_Sent:{
-            type:[transaction_Sent],
-        },
-        transactions_Recived:{
-            type:[transaction_Recived],
-        }
+        history:[operationHistory]
     })
 )
 module.exports = Account
