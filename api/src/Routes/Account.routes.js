@@ -6,4 +6,5 @@ module.exports = function (app, url) {
     app.use(url, router);
     app.post(`${url}/createAcc`, controller.CreateAcc);
     app.post(`${url}/signToAcc`, controller.SignToAcc);
+    app.post(`${url}/retait`, controller.PullMoney);
   };

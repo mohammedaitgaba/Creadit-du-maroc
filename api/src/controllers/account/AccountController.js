@@ -48,6 +48,25 @@ const SignToAcc = asyncHnadler(async(req,res)=>{
     }
 })
 
+const PullMoney = asyncHnadler(async(req,res)=>{
+    const {id_acc,balance_pulled,operationDate}=req.body
+    const account = await Account.findById(id_acc)
+    if (!account) {
+        res.status(400)
+        throw new Error('Compte non trouve')
+    }
+    if (account.balance>=balance_pulled) {
+       const newOperation = await Account.findByIdAndUpdate(id_acc,{$set:{balance:account.balance-balance_pulled}})
+       if (newOperation) {
+           res.json({message : "opération effectuée avec succès"})
+       }
+    }else{
+        res.status(400)
+        throw new Error(`l'opération a échoué, le maximum que vous pouvez tirer est :${account.balance} DH`)
+    }
+})
+
+
 module.exports={
-    CreateAcc,SignToAcc
+    CreateAcc,SignToAcc,PullMoney
 }
