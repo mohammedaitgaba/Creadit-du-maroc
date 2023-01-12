@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const transaction_Sent = new mongoose.Schema({
     reciver: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "users",
     },
     balance: {
       type: Number,
@@ -16,7 +16,7 @@ const transaction_Sent = new mongoose.Schema({
   const transaction_Recived = new mongoose.Schema({
     Sender: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "users",
     },
     balance: {
       type: Number,
@@ -32,7 +32,7 @@ const Account = mongoose.model(
     new mongoose.Schema({
         user:{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
+            ref: "users",
             required:true
         },
         reference:{

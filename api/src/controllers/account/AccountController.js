@@ -29,8 +29,25 @@ const CreateAcc = asyncHnadler(async(req,res)=>{
     : res.status(400)
     throw new Error("les données ne sont pas valides");
 })
-
+const SignToAcc = asyncHnadler(async(req,res)=>{
+    const {reference,password}=req.body
+    const myAcc = await Account.findOne({reference}).populate('user','id')
+    if (myAcc && await bycrypt.compare(password,myAcc.password)) {
+        res.json({
+            id:myAcc.id,
+            user:myAcc.user,
+            type:myAcc.type,
+            balance:myAcc.balance,
+            transactions_Sent:myAcc.transactions_Sent,
+            transactions_Recived:myAcc.transactions_Recived
+        })
+    }
+    else{
+        res.status(400)
+        throw new Error('informations non valables')
+    }
+})
 
 module.exports={
-    CreateAcc
+    CreateAcc,SignToAcc
 }

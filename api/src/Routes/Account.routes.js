@@ -5,5 +5,5 @@ const controller = require('../controllers/account/AccountController')
 module.exports = function (app, url) {
     app.use(url, router);
     app.post(`${url}/createAcc`, controller.CreateAcc);
-    // app.post(`${url}/signup`, controller.);
+    app.post(`${url}/signToAcc`, controller.SignToAcc);
   };

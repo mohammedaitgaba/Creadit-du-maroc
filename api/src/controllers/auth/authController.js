@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken')
 const signup = asyncHnadler(async (req, res) => {
   const { Fname, Lname, CIN, Phone, Birthday,Gender, Email, Password } = req.body;
   //   check for values of each feild
-  console.log(Email);
   if (Object.values(req.body).some((v) => !v)) {
     return res.sendStatus(400, {
       message: "Please fill all required fields",
