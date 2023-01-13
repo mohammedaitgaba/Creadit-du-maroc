@@ -11,11 +11,12 @@ export const useSign_up = ()=>{
         setError(null)
         axios.post('http://localhost:5000/api/CRM/signup',formdata)
         .then((response) => {
-            setData(response.data);
-            
+            console.log(response.data);
+            setIsLoading(false)
           }).catch(error => {
             setIsLoading(false)
             setError(error);
           });
     }
+    return {sign_up,isLoading,error}
 }
