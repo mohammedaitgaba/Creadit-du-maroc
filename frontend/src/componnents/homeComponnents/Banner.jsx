@@ -2,7 +2,7 @@ const Banner = () => {
   return (
     <section class="overflow-hidden">
       <div class="relative overflow-hidden bg-no-repeat bg-cover" id='home_div1'>
-        <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed" id='home_div2'>
+        <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden" id='home_div2'>
           <div class="flex justify-center items-center h-full">
             <div class="text-center text-white px-6 md:px-12">
               <h1 class="text-5xl md:text-6xl xl:text-5xl font-bold tracking-tight mb-12">Devenir client CRÉDIT DU MAROC <br /><span>en toute simplicité. </span></h1>

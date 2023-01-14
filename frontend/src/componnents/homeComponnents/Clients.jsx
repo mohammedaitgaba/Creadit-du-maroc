@@ -61,20 +61,20 @@ export const Clients = () => {
               </p>
             </div>
             <div>
-              <a
-                href="/"
-                aria-label=""
-                className="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
-              >
-                Learn more
-                <svg
-                  className="inline-block w-3 ml-2"
-                  fill="currentColor"
-                  viewBox="0 0 12 12"
-                >
-                  <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z" />
-                </svg>
-              </a>
+            <div class="mt-10 space-y-20">
+              <div class="w-full">
+                <div class="flex-1 h-full w-96 cursor-pointer">
+                  <div class="flex w-full bg-white shadow rounded-lg py-4 px-16">
+                    <p class="m-auto inset-0 text-xl font-semibold leading-7 text-center text-gray-800">OUVRIR MON COMPTE</p>
+                    <div class="">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             </div>
           </div>
           <div className="flex items-center justify-center -mx-4 lg:pl-8">

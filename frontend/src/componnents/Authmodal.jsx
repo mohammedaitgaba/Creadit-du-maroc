@@ -1,37 +1,49 @@
 import React, { useState,useEffect } from "react";
 import { useSign_in } from "../hooks/useSignin";
+import { useSign_up } from "../hooks/useSignup";
 
 function AuthModal({Open,Close}) {
   const [value, setValue] = useState();
   const [isLogin ,setIsLogin] = useState(true)
   const [data ,setdata] = useState([])
   // const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState('');
 
   const {sign_in, isLoading, error}=useSign_in()
+  const {sign_up, isLoading_up, error_up}=useSign_up()
   const handleChange = (e)=>{
     setFormData((previousState)=>({
         ...previousState,
         [e.target.name] : e.target.value,
     }))
-}
+  }
   const [formData,setFormData]=useState({
     Fname:'',
     Lname:'',
     Phone:"",
+    Birthday:"",
     Email:'',
+    CIN:'',
+    Gender:"Homme",
     Password:'',
     PasswordConfirmation:''
   })
-  const {Fname,Lname,Phone,Email,Password,PasswordConfirmation}=formData
-
+  const {Fname,Lname,Phone,Birthday,Email,CIN,Password,PasswordConfirmation}=formData
+  useEffect(()=>{
+    if (Password && PasswordConfirmation && Password!=PasswordConfirmation) {
+      setIsError(`password confirmation doesn't match password`)
+    }else{
+      setIsError('')
+    }
+  },[PasswordConfirmation,Password])
   const Sign_in = async()=>{
     await sign_in(formData)
     Close();
   }
 
-  const Sign_up = () => {
-    Close;
+  const Sign_up = async() => {
+    await sign_up(formData)
+    Close();
   };
 
   if (!Open) return null;
@@ -90,65 +102,77 @@ function AuthModal({Open,Close}) {
           </div>
           <div className="text-center text-lg font-bold">Registration</div>
           <div className="relative z-0 sm:mb-4 mb-0 w-full group">
-            <label htmlFor="floating_email">Email address</label>
-            <input
-              type="email"
-              name="floating_email"
-              id="floating_email"
-              className="block py-1.5 px-1 w-full text-sm text-gray-90 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
-              required
-            />
-          </div>
-          <div className="relative z-0 sm:mb-4 mb-0 w-full group">
             <div className="grid md:grid-cols-2 md:gap-6">
               <div className="relative z-0 sm:mb-4 mb-0 w-full group">
                 <label htmlFor="floating_first_name">First name</label>
                 <input
                   type="text"
-                  name="floating_first_name"
                   id="floating_first_name"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                   required
+                  name="Fname" value={Fname} onChange={handleChange}
                 />
               </div>
               <div className="relative z-0 sm:mb-4 mb-0 w-full group">
                 <label htmlFor="floating_last_name">Last name</label>
                 <input
                   type="text"
-                  name="floating_last_name"
                   id="floating_last_name"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                   required
+                  name="Lname" value={Lname} onChange={handleChange}
+                />
+              </div>
+            </div>            
+            <div className="grid md:grid-cols-2 md:gap-6">
+              <div className="relative z-0 sm:mb-4 mb-0 w-full group">
+                <label htmlFor="floating_first_name">Email</label>
+                <input
+                  type="email"
+                  id="floating_first_name"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" "
+                  required
+                  name="Email" value={Email} onChange={handleChange}
+                />
+              </div>
+              <div className="relative z-0 sm:mb-4 mb-0 w-full group">
+                <label htmlFor="floating_last_name">CIN</label>
+                <input
+                  type="text"
+                  id="floating_last_name"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  placeholder=" "
+                  required
+                  name="CIN" value={CIN} onChange={handleChange}
                 />
               </div>
             </div>
+            
             <div className="grid md:grid-cols-2 md:gap-6">
               <div className="relative z-0 sm:mb-4 mb-0 w-full group">
                 <label htmlFor="floating_phone">Phone number</label>
                 <input
                   type="tel"
                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                  name="floating_phone"
                   id="floating_phone"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                   required
+                  name="Phone" value={Phone} onChange={handleChange}
                 />
               </div>
               <div className="relative z-0 sm:mb-4 mb-0 w-full group">
                 <label htmlFor="Age">Age</label>
                 <input
-                  type="Number"
-                  min={0}
-                  max={100}
-                  name="Age"
+                  type="date"
                   id="Age"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                   required
+                  name="Birthday" value={Birthday} onChange={handleChange}
                 />
               </div>
             </div>
@@ -157,10 +181,10 @@ function AuthModal({Open,Close}) {
                 <label htmlFor="password">password</label>
                 <input
                   type="password"
-                  name="password"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                   required
+                  name="Password" value={Password} onChange={handleChange}
                 />
               </div>
               <div className="relative z-0 sm:mb-4 mb-0 w-full group">
@@ -169,17 +193,25 @@ function AuthModal({Open,Close}) {
                 </label>
                 <input
                   type="password"
-                  name="repeat_password"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
                   required
+                  name="PasswordConfirmation" value={PasswordConfirmation} onChange={handleChange}
                 />
+                {
+                  isError&&(
+                    <label htmlFor="floating_repeat_password" className="text-[red]">
+                      *{isError}
+                    </label>
+                  )
+                }
               </div>
+
             </div>
           </div>
           <div className="underline underline-offset-1 text-primary hover:text-senary cursor-pointer" onClick={()=>setIsLogin(true)}>Already registred</div>
-          <button type="button" className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Nouvel acc</button>
-
+          <button type="button" disabled={isLoading_up} onClick={()=>Sign_up()} className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Crée Compte</button>
+            {error_up &&<div className="text-[red]">{error_up}</div>}
         </form>
       </div>
     </div>
