@@ -5,3 +5,18 @@
 #jusus{
   background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('null');
 }
+#home_div1{
+  background-position: 50%; 
+  background-image: url('pics/Hero_Checking_Accounts.jpg');
+  height: 600px;
+  /* background-attachment: fixed; */
+}
+#home_div2{
+  background-color: rgba(0, 0, 0, 0.75);
+}
+#home_curve_banner{
+  height: 50px; 
+  transform: scale(2); 
+  transform-origin: top center; 
+  color: #fff;
+}
