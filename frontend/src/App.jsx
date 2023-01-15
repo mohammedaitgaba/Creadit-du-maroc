@@ -4,6 +4,7 @@ import NavBar from './componnents/Navbar'
 import Profile from './pages/Profile';
 import { Footer } from './componnents/Footer';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminDushboard from './pages/AdminDushboard';
 const App = () => {
   return (
     <div>
@@ -12,6 +13,7 @@ const App = () => {
                 <Routes>
                   <Route path='/profile' element={<Profile/>}/>
                   <Route path='/' element={<Home/>}/>
+                  <Route path='/Admin' element={<AdminDushboard/>}/>
                 </Routes>
                 <Footer />
             </BrowserRouter>
