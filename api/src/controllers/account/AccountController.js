@@ -78,10 +78,22 @@ const addOperation = asyncHnadler(async(id_acc,operationType,balance,operationDa
     }
 })
 
+const GetAllAccounts = asyncHnadler(async(req,res)=>{
+    const Accounts = await Account.find({})
+    if (!Accounts) {
+        throw new Error("no data available");
+      }
+      res.json({
+        message: "success",
+        data: Accounts,
+      });
+})
+
 
 
 module.exports={
     CreateAcc,
     SignToAcc,
-    PullMoney
+    PullMoney,
+    GetAllAccounts
 }
