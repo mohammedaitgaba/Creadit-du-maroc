@@ -1,15 +1,20 @@
 const User = require("../../models/userModel");
 const asyncHnadler = require("express-async-handler");
-
 const GetAllClients = asyncHnadler(async (req, res) => {
+
+  const pageSize = req.body.PageSize
+  const actuallPage = req.body.actuallPage || 0 
+  const clientsCounter = await User.countDocuments({})
   const clients = await User.find({
 
-  });
+  }).limit(pageSize).skip(pageSize * actuallPage)
   if (!clients) {
     throw new Error("no data available");
   }
   res.json({
     message: "success",
+    totalPages : Math.ceil(clientsCounter / pageSize),
+    total : clientsCounter,
     data: clients,
   });
 });
@@ -37,5 +42,5 @@ const getClientById = asyncHnadler(async (req, res) => {
 
 module.exports = { 
     GetAllClients,
-    getClientById
+    getClientById,
 };

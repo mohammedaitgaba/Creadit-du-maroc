@@ -45,6 +45,10 @@ const usersSchema = mongoose.Schema({
           },
         ImageData: {
             type: Buffer,
+        },
+        Deleted:{
+            type:Boolean,
+            default:false
         }
     })
 

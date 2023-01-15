@@ -38,6 +38,10 @@ const Account = mongoose.model(
             required:true,
             default:1000
         },
+        Status:{
+            type:Boolean,
+            default:true
+        },
         history:[operationHistory]
     })
 )
