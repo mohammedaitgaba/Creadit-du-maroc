@@ -28,5 +28,8 @@
     "nodemon": "^2.0.20",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1"
   }
 }
