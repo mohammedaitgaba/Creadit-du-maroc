@@ -11,7 +11,7 @@ const CreateAcc = asyncHnadler(async(req,res)=>{
         message: "Veuillez remplir tous les champs obligatoires",
       });
     }
-    const AccExist = await Account.findById(user)
+    const AccExist = await Account.findOne({user:user})
     if (AccExist) {
       res.status(400);
       throw new Error("Vous avez deja cree un compte");
@@ -25,7 +25,7 @@ const CreateAcc = asyncHnadler(async(req,res)=>{
         password:hashPassword,
         type
     })
-    account ? res.json({ message: "Compte créé avec succès" }) 
+    account ? res.json({ message: "Compte créé avec succès",ref:reference }) 
     : res.status(400)
     throw new Error("les données ne sont pas valides");
 })
@@ -88,12 +88,30 @@ const GetAllAccounts = asyncHnadler(async(req,res)=>{
         data: Accounts,
       });
 })
-
+const GetMyAccount = asyncHnadler(async(req,res)=>{
+    const {id}=req.body
+    const account = await Account.findOne({user:id})
+    if (!account) {
+        res.json({
+            message:`Vous n'avez pas encore créé votre compte`,
+            status:false
+        })
+    }else{
+        res.json({
+            status:true,
+            ref:account.reference,
+            type:account.type,
+            balance:account.balance,
+            history:account.history,
+        })
+    }
+})
 
 
 module.exports={
     CreateAcc,
     SignToAcc,
     PullMoney,
-    GetAllAccounts
+    GetAllAccounts,
+    GetMyAccount
 }
