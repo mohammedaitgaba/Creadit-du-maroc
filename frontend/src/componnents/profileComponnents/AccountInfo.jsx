@@ -14,6 +14,7 @@ const AccountInfo = () => {
     const id = JSON.parse(localStorage.getItem('user')).id
     const GetMyAccount = async()=>{
         setMessage('')
+        setAccount([])
         await axios.post('http://localhost:5000/api/CRM/myAccount',{id})
         .then((res=>{
             console.log(res);
@@ -30,17 +31,17 @@ const AccountInfo = () => {
         <p className='text-lg text-center font-bold py-5'>Compte info</p>
         {
             Account?
-            <section className='flex  justify-around'>
-                <div>
-                    Type de compte : {Account.type}
-                </div>                
-                <div>
-                    Balance : {Account.balance}DH
-                </div>                
-                <div>
-                    Compte reference : {Account.ref}
-                </div>
-            </section>:
+                <section className='flex  justify-around'>
+                    <div>
+                        Type de compte : {Account.type}
+                    </div>                
+                    <div>
+                        Balance : {Account.balance}DH
+                    </div>                
+                    <div>
+                        Compte reference : {Account.ref}
+                    </div>
+                </section>:
             null
         }
         {
