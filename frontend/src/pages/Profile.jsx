@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PhotoInput from '../componnents/profileComponnents/picUploader';
 import UserInfo from '../componnents/profileComponnents/UserInfo';
+import AccountInfo from '../componnents/profileComponnents/AccountInfo';
 const Profile = () => {
     const [openUploadModal, setOpenUploadModal] = useState(false);
   return (
@@ -50,13 +51,13 @@ const Profile = () => {
                 <UserInfo/>
                 {/* <!-- DataTable --> */}
                 <div class="bg-white p-3 shadow-sm rounded-sm">
-
+                  <AccountInfo/>
                 </div>
             </div>
         </div>
     </div>
     <PhotoInput Open={openUploadModal} Close={()=>setOpenUploadModal(false)}/>
-</div>
+    </div>
   )
 }
 
