@@ -2,8 +2,10 @@ import React, { useState ,useEffect} from 'react';
 import PhotoInput from '../componnents/profileComponnents/picUploader';
 import UserInfo from '../componnents/profileComponnents/UserInfo';
 import AccountInfo from '../componnents/profileComponnents/AccountInfo';
+import AccountTableData from '../componnents/profileComponnents/AccountTableData';
 import axios from 'axios';
 import moment from 'moment';
+// import SideBar from '../componnents/profileComponnents/SideBar';
 
 const Profile = () => {
     const [openUploadModal, setOpenUploadModal] = useState(false);
@@ -20,11 +22,11 @@ const Profile = () => {
       getClientById()
     },[])
   return (
-    <div class="bg-gray-100 pt-20">
-    <div class="container mx-auto p-5">
-        <div class="md:flex no-wrap md:-mx-2 ">
+    <div class="bg-gray-100 w-full flex">
+    <div class="container mx-auto p-5 pt-20">
+        <div class="md:flex no-wrap md:-mx-2 relaive">
             {/* <!-- Left Side --> */}
-            <div class="w-full md:w-3/12 md:mx-2">
+            <div class="w-full md:w-3/12 md:mx-2 mb-4">
                 {/* <!-- Profile Card --> */}
                 <div class="bg-gray-200 font-sans w-full flex flex-row justify-center items-center">
                   {
@@ -61,8 +63,12 @@ const Profile = () => {
                 {/* <!-- About Section --> */}
                 <UserInfo data={Client}/>
                 {/* <!-- DataTable --> */}
-              <div class="bg-white p-3 shadow-sm rounded-sm">
+              <div class="bg-white p-3 shadow-sm rounded-sm my-4">
                 <AccountInfo />
+              </div>
+              <div class="bg-white pt-3 ">
+              <p className='text-lg text-center font-bold py-2'>Compte Historique</p>
+                <AccountTableData />
               </div>
             </div>
         </div>

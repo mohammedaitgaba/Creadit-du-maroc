@@ -3,7 +3,6 @@ import axios from 'axios'
 import SideBar from '../componnents/profileComponnents/SideBar'
 import Profile from './Profile'
 import { Routes, Route } from "react-router-dom";
-import Operation from './Operation';
 import PullMoney from './PullMoney';
 import Transaction from './Transaction';
 const UserDushboard = () => {
@@ -31,7 +30,7 @@ const UserDushboard = () => {
         <SideBar/>
         <Routes>
             <Route path='/' element={<Profile/>}/>            
-            <Route path='/PullMoney' element={<PullMoney data={Account}/>}/>            
+            <Route path='/PullMoney' element={<PullMoney data={Account} SyncData ={()=>GetMyAccount()} />}/>            
             <Route path='/Transaction' element={<Transaction data={Account}/>}/>            
         </Routes>
     </div>
