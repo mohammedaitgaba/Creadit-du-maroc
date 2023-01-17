@@ -14,7 +14,7 @@ services :
     build: ./api
     container_name: api_c
     ports:
-      - '4000:3000'
+      - '5000:3000'
     environment:
       PORT: 3000
       MONGODB_URI: mongodb://mongo_db:27017
@@ -28,7 +28,7 @@ services :
     build: ./frontend
     container_name: frontend_c
     ports:
-     - '3000:3000'
+     - '8000:3001'
     stdin_open: true
     tty: true
 
