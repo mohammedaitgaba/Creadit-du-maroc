@@ -8,12 +8,11 @@ function NavBar() {
   const [navbar, setNavbar] = useState(false);
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const {user}=useAuthContext()
+  const {admin}=useAuthContext()
   const {logout}=useLogout()
   const sign_out = () => {
     logout()
   };
-
-    
   const active = () => {
     setNavbar(!navbar);
   };
@@ -62,26 +61,11 @@ function NavBar() {
               >
                 Acceuil
               </Link>
-            </li>
-            <li>
-              <Link to={'/up'}
-                className="block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent md:text-blue- hover:text-primary md:p-0 dark:text-white"
-                aria-current="page"
-              >
-                up
-              </Link>
-            </li>
-            <li>
-              <Link to={'/contact-us'}
-                className="block py-2 pl-3 pr-4  rounded  md:hover:bg-transparent md:border-0 md:hover:text-blue-700 hover:text-primary md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              >
-                Contact
-              </Link>
-            </li>
+            </li> 
             {
-              user?          
+              user?.message==="welcome"?
               <li>
-              <Link to={'/profile'}
+              <Link to={'/UserDushboard'}
                 className="block py-2 pl-3 pr-4  rounded  md:hover:bg-transparent md:border-0 md:hover:text-blue-700 hover:text-primary md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
                 {user.firstname} {user.lastname}
@@ -90,7 +74,18 @@ function NavBar() {
             null
             }
             {
-                user?
+              admin?
+                <li>
+                <Link to={'/admin'}
+                  className="block py-2 pl-3 pr-4  rounded  md:hover:bg-transparent md:border-0 md:hover:text-blue-700 hover:text-primary md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                >
+                  Dushboard
+                </Link>
+              </li>:
+              null
+            }
+            {
+                user||admin?
                 <li onClick={()=>sign_out()}>
                 <div
                   className="block py-3 px-4 border-none bg-primary cursor-pointer rounded-2xl  md:border-0  md:py-3 md:px-4  dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
