@@ -1,11 +1,12 @@
 import React from 'react'
 import Home from './pages/Home';
-import NavBar from './componnents/Navbar'
-import Profile from './pages/Profile';
+import NavBar from './componnents/Navbar';
+import UserDushboard from './pages/UserDushboard';
 import { Footer } from './componnents/Footer';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminDushboard from './pages/AdminDushboard';
 import { ToastContainer } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
@@ -14,7 +15,7 @@ const App = () => {
             <BrowserRouter>
                 <NavBar />
                 <Routes>
-                  <Route path='/profile' element={<Profile/>}/>
+                  <Route path='/UserDushboard/*' element={<UserDushboard/>}/>
                   <Route path='/' element={<Home/>}/>
                   <Route path='/Admin' element={<AdminDushboard/>}/>
                 </Routes>

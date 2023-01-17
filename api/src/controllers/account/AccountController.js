@@ -99,6 +99,7 @@ const GetMyAccount = asyncHnadler(async(req,res)=>{
     }else{
         res.json({
             status:true,
+            id:account.id,
             ref:account.reference,
             type:account.type,
             balance:account.balance,
