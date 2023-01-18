@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
-const ClientsTable = () => {
+const Accounts = () => {
     const [PageSize, setPageSize] = useState(5)
     const [actuallPage, setActuallPage] = useState(0)
-    const [Clients, setClients] = useState([])
+    const [Accounts, setAccounts] = useState([])
     const [totalPages, setTotalPages] = useState(0)
     const [totalClients, setTotalClients] = useState(0)
     
@@ -11,12 +11,13 @@ const ClientsTable = () => {
         getAllClients()
     },[actuallPage,PageSize])
     const getAllClients = async()=>{
-        setClients([])
-        axios.post('http://localhost:5000/api/CRM/AllClients',{PageSize,actuallPage})
+        setAccounts([])
+        axios.post('http://localhost:5000/api/CRM/AllAccounts',{PageSize,actuallPage})
         .then((res)=>res.data)
         .then((data)=>{
-            data.client.map(element=>{
-                setClients(prevArray => [...prevArray, element])
+            data.accounts.map(element=>{
+                console.log(element);
+                setAccounts(prevArray => [...prevArray, element])
             })
             setTotalPages(data.totalPages)
             setTotalClients(data.total)  
@@ -35,7 +36,7 @@ const ClientsTable = () => {
   return (
     <section className='w-[80%]'>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <h1 className="text-center py-5 text-xl font-bold">Clients</h1>
+        <h1 className="text-center py-5 text-xl font-bold">Accounts</h1>
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -46,19 +47,19 @@ const ClientsTable = () => {
                         Nom
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Email
+                        CIN
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        CIN
+                        Acc ref
+                    </th>                  
+                    <th scope="col" class="px-6 py-3">
+                        balance
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        type
                     </th>                    
                     <th scope="col" class="px-6 py-3">
-                        N°Tele
-                    </th>                    
-                    <th scope="col" class="px-6 py-3">
-                        Genre
-                    </th>                    
-                    <th scope="col" class="px-6 py-3">
-                        Age
+                        Historique
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Supp
@@ -70,29 +71,33 @@ const ClientsTable = () => {
 
             <tbody>
                 {
-                    Clients?
-                        Clients.map((element,i)=>(
+                    Accounts?
+                        Accounts.map((element,i)=>(
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={i}>
                                 <td class="px-6 py-4">
-                                    {element.Fname}
+                                    {element.user.Fname}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {element.Lname}
+                                    {element.user.Lname}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {element.Email}
+                                    {element.user.CIN}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {element.CIN}
+                                    {element.reference}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {element.Phone}
+                                    {element.balance} DH
                                 </td>
                                 <td class="px-6 py-4">
-                                    {element.Gender}
+                                    {element.type}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {element.Birthday}
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" className='cursor-pointer'
+                                        width="35" height="35"
+                                        viewBox="0 0 128 128">
+                                            <path d="M 64 6.0507812 C 49.15 6.0507812 34.3 11.7 23 23 C 0.4 45.6 0.4 82.4 23 105 C 34.3 116.3 49.2 122 64 122 C 78.8 122 93.7 116.3 105 105 C 127.6 82.4 127.6 45.6 105 23 C 93.7 11.7 78.85 6.0507812 64 6.0507812 z M 64 12 C 77.3 12 90.600781 17.099219 100.80078 27.199219 C 121.00078 47.499219 121.00078 80.500781 100.80078 100.80078 C 80.500781 121.10078 47.500781 121.10078 27.300781 100.80078 C 7.0007813 80.500781 6.9992188 47.499219 27.199219 27.199219 C 37.399219 17.099219 50.7 12 64 12 z M 64 42 C 62.3 42 61 43.3 61 45 L 61 61 L 45 61 C 43.3 61 42 62.3 42 64 C 42 65.7 43.3 67 45 67 L 61 67 L 61 83 C 61 84.7 62.3 86 64 86 C 65.7 86 67 84.7 67 83 L 67 67 L 83 67 C 84.7 67 86 65.7 86 64 C 86 62.3 84.7 61 83 61 L 67 61 L 67 45 C 67 43.3 65.7 42 64 42 z"></path>
+                                    </svg>
                                 </td>
                                 <td className="px-6 py-4 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" className='cursor-pointer'
@@ -142,4 +147,4 @@ const ClientsTable = () => {
   )
 }
 
-export default ClientsTable
+export default Accounts

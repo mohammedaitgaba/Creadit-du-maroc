@@ -2,10 +2,11 @@ import React,{useEffect,useState} from 'react'
 import axios from 'axios'
 // import { useAuthContext } from "../../hooks/useAuthContext";
 import AddAccountModal from './AddAccountModal'
-const AccountInfo = () => {
+const AccountInfo = (props) => {
     const [Account, setAccount] = useState([])
     const [message, setMessage] = useState('')
     const [openAddAccountModal, setOpenAddAccountModal] = useState(false);
+    
 
     // const {user}=useAuthContext()
     useEffect(()=>{
@@ -23,6 +24,7 @@ const AccountInfo = () => {
             }else{
                 console.log(res);
                 setAccount(res.data)
+                props.func(res.data.id);
             }
         }))
     }
