@@ -24,7 +24,7 @@ export const AuthContextProvider = ({children})=>{
         const user =JSON.parse(localStorage.getItem('user'))
         const admin =JSON.parse(localStorage.getItem('admin'))
         user?dispatch({type:'LOGIN',payload:user}):null
-        admin?dispatch({type:'LOGIN',payload:admin}):null
+        admin?dispatch({type:'LOGIN_ADMIN',payload:admin}):null
     },[])
     
     console.log('authContext state :',state);

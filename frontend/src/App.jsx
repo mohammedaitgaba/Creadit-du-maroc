@@ -22,7 +22,7 @@ const App = () => {
               <Route path='/UserDushboard/*' element={<UserDushboard/>}/>
             </Route>            
             <Route element={<OnlyAdminRouts/>}>
-              <Route path='/Admin' element={<AdminDushboard/>}/>
+              <Route path='/Admin/*' element={<AdminDushboard/>}/>
             </Route>
           </Routes>
           <ToastContainer/>

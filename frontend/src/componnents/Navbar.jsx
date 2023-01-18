@@ -13,6 +13,10 @@ function NavBar() {
   const sign_out = () => {
     logout()
   };
+  if (admin) {
+    
+    console.log(admin);
+  }
   const active = () => {
     setNavbar(!navbar);
   };
@@ -59,7 +63,7 @@ function NavBar() {
                 className="block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent md:text-blue- hover:text-primary md:p-0 dark:text-white"
                 aria-current="page"
               >
-                Acceuil
+                Accueil
               </Link>
             </li> 
             {

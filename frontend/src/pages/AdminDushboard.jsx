@@ -1,9 +1,16 @@
+import { Routes, Route } from "react-router-dom";
 import ClientsTable from "../componnents/DushboardComponnents/ClientsTable"
+import SideBarAdmin from "../componnents/DushboardComponnents/SideBarAdmin"
+import Accounts from "../componnents/DushboardComponnents/Accounts";
+
 const AdminDushboard = () => {
   return (
-    <div>
-        <h1 className="text-center py-5 text-xl font-bold">Clients</h1>
-        <ClientsTable/>
+    <div className="flex w-full items-center">
+        <SideBarAdmin/>
+        <Routes>
+            <Route path='/' element={<ClientsTable/>}/>            
+            <Route path='/Accounts' element={<Accounts/>}/>            
+        </Routes>
     </div>
   )
 }
