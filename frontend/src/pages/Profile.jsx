@@ -3,14 +3,19 @@ import PhotoInput from '../componnents/profileComponnents/picUploader';
 import UserInfo from '../componnents/profileComponnents/UserInfo';
 import AccountInfo from '../componnents/profileComponnents/AccountInfo';
 import AccountTableData from '../componnents/profileComponnents/AccountTableData';
+import TransactionTableData from '../componnents/profileComponnents/TransactionTableData';
 import axios from 'axios';
 import moment from 'moment';
 // import SideBar from '../componnents/profileComponnents/SideBar';
 
 const Profile = () => {
     const [openUploadModal, setOpenUploadModal] = useState(false);
+    const [account_id,setAccount_id] = useState('')
     const id = JSON.parse(localStorage.getItem('user')).id
     const [Client, setClient] = useState([])
+    const pull_data = (data) => {
+      setAccount_id(data)
+    }
     const getClientById = async()=>{
       await axios.post('http://localhost:5000/api/CRM/ClientById',{id})
       .then((res)=>{
@@ -64,11 +69,15 @@ const Profile = () => {
                 <UserInfo data={Client}/>
                 {/* <!-- DataTable --> */}
               <div class="bg-white p-3 shadow-sm rounded-sm my-4">
-                <AccountInfo />
+                <AccountInfo func={pull_data}/>
               </div>
               <div class="bg-white pt-3 ">
               <p className='text-lg text-center font-bold py-2'>Compte Historique</p>
                 <AccountTableData />
+              </div>              
+              <div class="bg-white pt-3 ">
+              <p className='text-lg text-center font-bold py-2'>Transactions Historique</p>
+                <TransactionTableData Acc={account_id}/>
               </div>
             </div>
         </div>
