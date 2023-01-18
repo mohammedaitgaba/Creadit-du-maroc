@@ -7,6 +7,6 @@ module.exports = function (app, url) {
     app.post(`${url}/createAcc`, controller.CreateAcc);
     app.post(`${url}/signToAcc`, controller.SignToAcc);
     app.post(`${url}/retait`, controller.PullMoney);
-    app.get(`${url}/AllAccounts`, controller.GetAllAccounts);
+    app.post(`${url}/AllAccounts`, controller.GetAllAccounts);
     app.post(`${url}/myAccount`, controller.GetMyAccount);
   };
